@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Suggestion Box</title>
+{% endblock  %}
+
+{% block body %}
+
+logged as : {{user.username}}
+
+{% for idea in ideas %}
+{{idea}}
+{% endfor %}
+
+
+{% endblock body %}

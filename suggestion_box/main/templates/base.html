@@ -1,0 +1,46 @@
+{% comment %} {% load static %} {% endcomment %}
+
+<html>
+    <head>
+        {% block title %} {% endblock %}
+
+    </head>
+
+    <body>
+        <header>
+            <nav> <!-- ##############################       NAV       ###########################-->
+                <ul>
+                    {% if user.is_staff %}
+                    <li><a href='/admin'>Admin</a></li>
+                    {% endif %}
+
+                    <li><a href="{% url 'homepage' %}">Home</a></li>
+
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Log out</a></li>
+                    <li><a href="{% url 'ideas' %}">All ideas</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Log in</a></li>
+                    {% endif %}
+
+            {% for message in messages %}
+            <div class="alert"><!--#########################  ALERT BOX   #############################-->
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                {{ message }}
+            </div>
+            {% endfor %}
+        
+        <main><!--###############################   BODY   #####################################-->
+        {% block body %} {% endblock %}
+        </main>
+
+
+        <footer><!-- #######################    FOOTER   #################################-->
+            <div class="footercont">
+                <p><span class="footer-title">About :</span><br>Website created by Maxime Rowell as en exercise for Simplon Tech IA Roubaix</p>
+                <p><span class="footer-title">Contact</span><br>Phone : 06 11 22 33 44<br>Email : Support@suggestionbox.com</p>
+            </div>
+        <footer>
+    </body>
+
+</html>

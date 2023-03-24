@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Ideas list</title>
+{% endblock  %}
+
+{% block body %}
+<h1>New idea :</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="name">Idea :</label>
+        <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="Clean up the room...">
+    </div>
+    <div class="form-group">
+        <label for="details">details</label>
+        <input type="textarea" class="form-control" name="details" placeholder="">
+    </div>
+          
+          <button type="submit" class="btn btn-primary">Add</button>
+</form>
+<h1>Your ideas :</h1>
+<ul>
+    {% for idea in your_ideas %}
+    <li>{{idea.name}}. Likes : {{idea.likes}}</li>
+    <a href="{% url 'delete' id=idea.id %}">delete</a>
+    {% endfor %}
+</ul>
+
+<h1>Other ideas :</h1>
+<ul>
+    {% for idea in other_ideas %}
+    <li>{{idea.name}}, proposée par {{idea.author.username}}.   Likes : {{idea.likes}}</li>
+    <a href="{% url 'like' id=idea.id %}">Like</a>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
